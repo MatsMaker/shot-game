@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     public float spawnPosY = 0;
     private float spawnRangeX = 15;
-    private float spawnRangeZ = 125;
+    private float spawnRangeZ = 120;
 
     private float startDelay = 2;
     private float spawnInterval = 1.5f;
-    public GameObject[] animalPrefabs;
+    public GameObject[] enemyPrefabs;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
     }
 
     // Update is called once per frame
@@ -24,11 +23,13 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void startSpawn() {
+        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
+    }
     void SpawnRandomAnimal()
     {
-        print("span");
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnRangeZ);
-        int animalIndex = Random.Range(0, animalPrefabs.Length);
-        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+        int animalIndex = Random.Range(0, enemyPrefabs.Length);
+        Instantiate(enemyPrefabs[animalIndex], spawnPos, enemyPrefabs[animalIndex].transform.rotation);
     }
 }

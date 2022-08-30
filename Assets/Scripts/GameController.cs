@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
 
     public PlayerController player;
+    public EnemyManager enemyManager;
     private float XRange = 15;
     private float horizontalInput;
     private Vector3 clickPosition;
@@ -17,6 +16,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         horizontalInput = horizontalInput + 1;
+        enemyManager.startSpawn();
     }
 
     // Update is called once per frame
