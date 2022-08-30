@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5370427921806095079}
   - component: {fileID: 2962225190257453698}
   m_Layer: 0
-  m_Name: Food_Pizza_01
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

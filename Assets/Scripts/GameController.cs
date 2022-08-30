@@ -7,9 +7,9 @@ public class GameController : MonoBehaviour
     public EnemyManager enemyManager;
     private float XRange = 15;
     private float horizontalInput;
+
     private Vector3 clickPosition;
     private float clickAngle = 0;
-
     public Plane plane = new Plane(Vector3.up, 0);
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
             if (plane.Raycast(ray, out distance))
             {
                 clickPosition = ray.GetPoint(distance);
-                clickPosition.y = player.transform.position.y;
+                // clickPosition.y = transform.position.y;
                 clickAngle = calculateDirectionAngle();
 
                 player.shot(clickAngle);
@@ -50,9 +50,9 @@ public class GameController : MonoBehaviour
 
     private float calculateDirectionAngle()
     {
-        Vector3 direction = clickPosition - player.transform.position;
+        Vector3 direction = clickPosition - transform.position;
         int sign = direction.x >= 0 ? 1 : -1;
         int offset = sign >= 0 ? 0 : 360;
-        return Vector3.Angle(player.transform.forward, direction) * sign + offset;
+        return Vector3.Angle(transform.forward, direction) * sign + offset;
     }
 }
