@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textElement.text = "Amo: " + countAmo;
+        textElement.text = "Boots: " + countAmo;
     }
 
     private IEnumerator updateAmo()
