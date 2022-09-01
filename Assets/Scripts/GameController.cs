@@ -4,6 +4,8 @@ public class GameController : MonoBehaviour
 {
 
     public PlayerController player;
+    protected Joystick joystick;
+    protected Joybutton joybutton;
     public EnemyManager enemyManager;
     private float XRange = 15;
     private float horizontalInput;
@@ -15,6 +17,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        joystick = FindObjectOfType<Joystick>();
+        joybutton = FindObjectOfType<Joybutton>();
         horizontalInput = horizontalInput + 1;
         enemyManager.startSpawn();
     }
@@ -22,7 +26,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
         if (player.transform.position.x < -XRange)
         {
             player.transform.position = new Vector3(-XRange, player.transform.position.y, player.transform.position.z);
@@ -31,7 +34,17 @@ public class GameController : MonoBehaviour
         {
             player.transform.position = new Vector3(XRange, player.transform.position.y, player.transform.position.z);
         }
-        player.transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * player.speed);
+
+        // if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        // {
+        player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.speed);
+        // }
+        // else
+        // {
+        //     horizontalInput = Input.GetAxis("Horizontal");
+        //     player.transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * player.speed);
+
+        // }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
