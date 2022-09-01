@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
+
+    public Text textElement;
     public float speed = 10.0f;
     public GameObject projectilePrefab;
     private float YProjectileShot = 2;
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textElement.text = "Amo: " + countAmo;
     }
 
     private IEnumerator updateAmo()
@@ -30,21 +34,19 @@ public class PlayerController : MonoBehaviour
 
         if (countAmo <= 0)
         {
-            print("Start reload amo");
             yield return new WaitForSeconds(5);
-            print("Reloaded amo");
             countAmo = maxAmo;
             isReadyToShot = countAmo > 0;
         }
     }
 
-    public void shot(float angle = 0)
+    public void shot(Vector3 angle)
     {
         if (isReadyToShot)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
             projectile.transform.position = new Vector3(projectile.transform.position.x, YProjectileShot, projectile.transform.position.z);
-            projectile.transform.rotation = Quaternion.Euler(0, angle, 0);
+            projectile.transform.rotation = Quaternion.Euler(angle);
             StartCoroutine(updateAmo());
         }
     }
