@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class ProjectileCollisions : MonoBehaviour
 {
+
+    public GameObject grave;
     void OnTriggerEnter(Collider other)
     {
+        Vector3 gravePos = other.gameObject.transform.position;
+        Instantiate(grave, gravePos, Quaternion.Euler(new Vector3(0, 0, 0)));
         Destroy(gameObject);
         Destroy(other.gameObject);
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 483357977982842168}
   - component: {fileID: 478404809837381428}
   - component: {fileID: 478404809837381433}
-  - component: {fileID: 478404809837381432}
+  - component: {fileID: -2964193799787960858}
   m_Layer: 0
   m_Name: Army_boot 1
   m_TagString: Untagged
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a3c3f69b3826c9a9f1bd871ca3bea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &478404809837381432
+--- !u!114 &-2964193799787960858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 748384179304870170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea74e1108094d80ea7a3727c661f137, type: 3}
+  m_Script: {fileID: 11500000, guid: 002465a33eec1d2298cd43c9758a2b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grave: {fileID: 7187773428229055980, guid: 9f4b2e7f56fc3a1318474e43a97f663b, type: 3}
