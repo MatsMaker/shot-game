@@ -4,7 +4,8 @@ public class GameController : MonoBehaviour
 {
     public PlayerController player;
     protected Joystick joystick;
-    protected Joybutton joybutton;
+    protected JoyButtonShot joyButtonShot;
+    protected JoyButtonAmo joyButtonAmo;
     protected Camera mMainCamera;
     protected Vector3 diffPlayerCamera;
     public EnemyManager enemyManager;
@@ -13,7 +14,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         joystick = FindObjectOfType<Joystick>();
-        joybutton = FindObjectOfType<Joybutton>();
+        joyButtonShot = FindObjectOfType<JoyButtonShot>();
+        joyButtonAmo = FindObjectOfType<JoyButtonAmo>();
+
         mMainCamera = Camera.main;
         Vector3 cameraPosition = Camera.main.transform.position;
         diffPlayerCamera = new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z) - player.transform.position;
@@ -36,10 +39,14 @@ public class GameController : MonoBehaviour
         player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.speed);
         mMainCamera.transform.position = player.transform.position + diffPlayerCamera;
 
-
-        if (joybutton.Pressed)
+        if (joyButtonAmo.Pressed)
         {
-            player.shot(Vector3.forward);
+            player.mineShot();
+        }
+
+        if (joyButtonShot.Pressed)
+        {
+            player.bootsShot(Vector3.forward);
         }
     }
 }

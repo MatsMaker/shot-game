@@ -29,7 +29,7 @@ public class ClickAngle : MonoBehaviour
                 clickPosition.y = player.transform.position.y;
                 clickAngle = calculateDirectionAngle();
 
-                player.shot(new Vector3(0, clickAngle, 0));
+                player.bootsShot(new Vector3(0, clickAngle, 0));
             }
         }
     }

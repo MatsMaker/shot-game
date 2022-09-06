@@ -6,11 +6,22 @@ public class PlayerController : MonoBehaviour
 
     public Text textElement;
     public float speed = 10.0f;
-    public GameObject projectilePrefab;
+    public GameObject bootsPrefab;
     private float YProjectileShot = 2;
-    public int maxAmo = 30;
-    public int countAmo = 30;
-    public bool isReadyToShot = true;
+    public int maxBoots = 30;
+    public int countBoots = 30;
+    public int resetBootsTime = 5;
+    public bool isReadyToBootsShot = true;
+
+
+    public GameObject minePrefab;
+    public int countMine = 5;
+    public int maxMine = 5;
+    public int resetMineTime = 20;
+    public bool isReadyToMineShot = true;
+
+
+
 
 
     // Start is called before the first frame update
@@ -21,33 +32,59 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textElement.text = "Boots: " + countAmo;
+        textElement.text = "Boots: " + countBoots;
     }
 
-    private IEnumerator updateAmo()
+    private IEnumerator updateBootsAmo()
     {
-        if (countAmo > 0)
+        if (countBoots > 0)
         {
-            countAmo--;
-            isReadyToShot = countAmo > 0;
+            countBoots--;
+            isReadyToBootsShot = countBoots > 0;
         }
 
-        if (countAmo <= 0)
+        if (countBoots <= 0)
         {
-            yield return new WaitForSeconds(5);
-            countAmo = maxAmo;
-            isReadyToShot = countAmo > 0;
+            yield return new WaitForSeconds(resetBootsTime);
+            countBoots = maxBoots;
+            isReadyToBootsShot = countBoots > 0;
         }
     }
 
-    public void shot(Vector3 angle)
+    public void bootsShot(Vector3 angle)
     {
-        if (isReadyToShot)
+        if (isReadyToBootsShot)
         {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+            GameObject projectile = Instantiate(bootsPrefab, transform.position, transform.rotation);
             projectile.transform.position = new Vector3(projectile.transform.position.x, YProjectileShot, projectile.transform.position.z);
             projectile.transform.rotation = Quaternion.Euler(angle);
-            StartCoroutine(updateAmo());
+            StartCoroutine(updateBootsAmo());
+        }
+    }
+
+    private IEnumerator updateMineAmo()
+    {
+        if (countMine > 0)
+        {
+            countMine--;
+            isReadyToMineShot = countMine > 0;
+        }
+
+        if (countMine <= 0)
+        {
+            yield return new WaitForSeconds(resetMineTime);
+            countMine = maxMine;
+            isReadyToMineShot = countMine > 0;
+        }
+    }
+
+    public void mineShot()
+    {
+        if (isReadyToMineShot)
+        {
+            GameObject projectile = Instantiate(minePrefab, transform.position, Quaternion.Euler(minePrefab.transform.position.x, minePrefab.transform.position.y, minePrefab.transform.position.z));
+            projectile.transform.position = new Vector3(projectile.transform.position.x, transform.position.y, projectile.transform.position.z);
+            StartCoroutine(updateMineAmo());
         }
     }
 }
