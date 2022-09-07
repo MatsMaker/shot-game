@@ -10,14 +10,16 @@ public class PlayerController : MonoBehaviour
     private float YProjectileShot = 2;
     public int maxBoots = 30;
     public int countBoots = 30;
-    public int resetBootsTime = 5;
+    public float cooldownBoots = 0.3f;
+    public int reloadBootsTime = 5;
     public bool isReadyToBootsShot = true;
 
 
     public GameObject minePrefab;
     public int countMine = 5;
     public int maxMine = 5;
-    public int resetMineTime = 15;
+    public int reloadMineTime = 15;
+    public float cooldownMine = 1f;
     public bool isReadyToMineShot = true;
 
 
@@ -37,12 +39,14 @@ public class PlayerController : MonoBehaviour
         if (countBoots > 0)
         {
             countBoots--;
+            isReadyToBootsShot = false;
+            yield return new WaitForSeconds(cooldownBoots);
             isReadyToBootsShot = countBoots > 0;
         }
 
         if (countBoots <= 0)
         {
-            yield return new WaitForSeconds(resetBootsTime);
+            yield return new WaitForSeconds(reloadBootsTime);
             countBoots = maxBoots;
             isReadyToBootsShot = countBoots > 0;
         }
@@ -64,12 +68,14 @@ public class PlayerController : MonoBehaviour
         if (countMine > 0)
         {
             countMine--;
+            isReadyToMineShot = false;
+            yield return new WaitForSeconds(cooldownMine);
             isReadyToMineShot = countMine > 0;
         }
 
         if (countMine <= 0)
         {
-            yield return new WaitForSeconds(resetMineTime);
+            yield return new WaitForSeconds(reloadMineTime);
             countMine = maxMine;
             isReadyToMineShot = countMine > 0;
         }
