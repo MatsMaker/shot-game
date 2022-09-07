@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public int playAreaForward = 125;
+    public int playAreaBack = -25;
+    public float playAreaXRange = 15;
+
     public PlayerController player;
     protected Joystick joystick;
     protected JoyButtonShot joyButtonShot;
@@ -9,7 +13,6 @@ public class GameController : MonoBehaviour
     protected Camera mMainCamera;
     protected Vector3 diffPlayerCamera;
     public EnemyManager enemyManager;
-    private float XRange = 15;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,13 +29,21 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.x < -XRange)
+        if (player.transform.position.x < -playAreaXRange)
         {
-            player.transform.position = new Vector3(-XRange, player.transform.position.y, player.transform.position.z);
+            player.transform.position = new Vector3(-playAreaXRange, player.transform.position.y, player.transform.position.z);
         }
-        if (player.transform.position.x > XRange)
+        if (player.transform.position.x > playAreaXRange)
         {
-            player.transform.position = new Vector3(XRange, player.transform.position.y, player.transform.position.z);
+            player.transform.position = new Vector3(playAreaXRange, player.transform.position.y, player.transform.position.z);
+        }
+        if (player.transform.position.z > playAreaForward)
+        {
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, playAreaForward);
+        }
+        if (player.transform.position.z < playAreaBack)
+        {
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, playAreaBack);
         }
 
         player.transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * player.speed);
