@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         joystick = FindObjectOfType<Joystick>();
-        joyButtonShot = FindObjectOfType<JoyButtonShot>();
-        joyButtonAmo = FindObjectOfType<JoyButtonAmo>();
+        joyButtonShot = GameObject.Find("JoyButton1").GetComponent<JoyButtonShot>();
+        joyButtonAmo = GameObject.Find("JoyButton2").GetComponent<JoyButtonAmo>();
 
         mMainCamera = Camera.main;
         Vector3 cameraPosition = Camera.main.transform.position;

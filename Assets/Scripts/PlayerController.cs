@@ -17,11 +17,8 @@ public class PlayerController : MonoBehaviour
     public GameObject minePrefab;
     public int countMine = 5;
     public int maxMine = 5;
-    public int resetMineTime = 20;
+    public int resetMineTime = 15;
     public bool isReadyToMineShot = true;
-
-
-
 
 
     // Start is called before the first frame update
@@ -82,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isReadyToMineShot)
         {
-            GameObject projectile = Instantiate(minePrefab, transform.position, Quaternion.Euler(minePrefab.transform.position.x, minePrefab.transform.position.y, minePrefab.transform.position.z));
+            GameObject projectile = Instantiate(minePrefab, transform.position, Quaternion.Euler(minePrefab.transform.position.x, minePrefab.transform.position.y + 1, minePrefab.transform.position.z));
             projectile.transform.position = new Vector3(projectile.transform.position.x, transform.position.y, projectile.transform.position.z);
             StartCoroutine(updateMineAmo());
         }
