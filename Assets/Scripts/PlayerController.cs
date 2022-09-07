@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public Text textElement;
+    public Text textElement1;
     public float speed = 10.0f;
     public GameObject bootsPrefab;
     private float YProjectileShot = 2;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         textElement.text = "Boots: " + countBoots;
+        textElement1.text = "Mines: " + countMine;
     }
 
     private IEnumerator updateBootsAmo()
