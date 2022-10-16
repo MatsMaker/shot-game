@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClickAngle : MonoBehaviour
 {
-    public PlayerController player;
+    public PlayerManager player;
     private Vector3 clickPosition;
     private float clickAngle = 0;
     public Plane plane = new Plane(Vector3.up, 0);

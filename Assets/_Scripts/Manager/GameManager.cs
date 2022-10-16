@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public int playAreaForward = 125;
     public int playAreaBack = -25;
     public float playAreaXRange = 15;
 
-    public PlayerController player;
+    public PlayerManager player;
     protected Joystick joystick;
     protected JoyButtonShot joyButtonShot;
     protected JoyButtonAmo joyButtonAmo;

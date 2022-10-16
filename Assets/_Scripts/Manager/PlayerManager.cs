@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class PlayerController : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
 
     public Text textElement;

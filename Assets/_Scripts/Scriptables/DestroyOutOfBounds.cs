@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    private GameController gameController;
+    private GameManager GameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z > gameController.playAreaForward) {
+        if (transform.position.z > GameManager.playAreaForward) {
             Destroy(gameObject);
         }
-        if (transform.position.z < gameController.playAreaBack)
+        if (transform.position.z < GameManager.playAreaBack)
         {
             Destroy(gameObject);
             Debug.Log("Game Over!");
