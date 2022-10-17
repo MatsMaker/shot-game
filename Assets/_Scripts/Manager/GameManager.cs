@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, playAreaBack);
         }
 
-        player.transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * player.speed);
-        player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.speed);
+        player.transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * player.state.speed);
+        player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.state.speed);
         mMainCamera.transform.position = player.transform.position + diffPlayerCamera;
 
         if (joyButtonAmo.Pressed)

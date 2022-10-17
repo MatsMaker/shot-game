@@ -6,60 +6,50 @@ public class PlayerManager : MonoBehaviour
 
     public Text textElement;
     public Text textElement1;
-    public float speed = 10.0f;
+    public PlayerState state;
+    public BootsAmo bootsAmo;
     public GameObject bootsPrefab;
-    private float YProjectileShot = 2;
-    public int maxBoots = 30;
-    public int countBoots = 30;
-    public float cooldownBoots = 0.3f;
-    public int reloadBootsTime = 5;
-    public bool isReadyToBootsShot = true;
 
-
+    public MineAmo minesAmo;
     public GameObject minePrefab;
-    public int countMine = 5;
-    public int maxMine = 5;
-    public int reloadMineTime = 15;
-    public float cooldownMine = 1f;
-    public bool isReadyToMineShot = true;
-
 
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        textElement.text = "Boots: " + countBoots;
-        textElement1.text = "Mines: " + countMine;
+        textElement.text = "Boots: " + bootsAmo.countBoots;
+        textElement1.text = "Mines: " + minesAmo.countMine;
     }
 
     private IEnumerator updateBootsAmo()
     {
-        if (countBoots > 0)
+        if (bootsAmo.countBoots > 0)
         {
-            countBoots--;
-            isReadyToBootsShot = false;
-            yield return new WaitForSeconds(cooldownBoots);
-            isReadyToBootsShot = countBoots > 0;
+            bootsAmo.countBoots--;
+            bootsAmo.isReadyToBootsShot = false;
+            yield return new WaitForSeconds(bootsAmo.cooldownBoots);
+            bootsAmo.isReadyToBootsShot = bootsAmo.countBoots > 0;
         }
 
-        if (countBoots <= 0)
+        if (bootsAmo.countBoots <= 0)
         {
-            yield return new WaitForSeconds(reloadBootsTime);
-            countBoots = maxBoots;
-            isReadyToBootsShot = countBoots > 0;
+            yield return new WaitForSeconds(bootsAmo.reloadBootsTime);
+            bootsAmo.countBoots = bootsAmo.maxBoots;
+            bootsAmo.isReadyToBootsShot = bootsAmo.countBoots > 0;
         }
     }
 
     public void bootsShot(Vector3 angle)
     {
-        if (isReadyToBootsShot)
+        if (bootsAmo.isReadyToBootsShot)
         {
             GameObject projectile = Instantiate(bootsPrefab, transform.position, transform.rotation);
-            projectile.transform.position = new Vector3(projectile.transform.position.x, YProjectileShot, projectile.transform.position.z);
+            projectile.transform.position = new Vector3(projectile.transform.position.x, state.YProjectileShot, projectile.transform.position.z);
             projectile.transform.rotation = Quaternion.Euler(angle);
             StartCoroutine(updateBootsAmo());
         }
@@ -67,25 +57,25 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator updateMineAmo()
     {
-        if (countMine > 0)
+        if (minesAmo.countMine > 0)
         {
-            countMine--;
-            isReadyToMineShot = false;
-            yield return new WaitForSeconds(cooldownMine);
-            isReadyToMineShot = countMine > 0;
+            minesAmo.countMine--;
+            minesAmo.isReadyToMineShot = false;
+            yield return new WaitForSeconds(minesAmo.cooldownMine);
+            minesAmo.isReadyToMineShot = minesAmo.countMine > 0;
         }
 
-        if (countMine <= 0)
+        if (minesAmo.countMine <= 0)
         {
-            yield return new WaitForSeconds(reloadMineTime);
-            countMine = maxMine;
-            isReadyToMineShot = countMine > 0;
+            yield return new WaitForSeconds(minesAmo.reloadMineTime);
+            minesAmo.countMine = minesAmo.maxMine;
+            minesAmo.isReadyToMineShot = minesAmo.countMine > 0;
         }
     }
 
     public void mineShot()
     {
-        if (isReadyToMineShot)
+        if (minesAmo.isReadyToMineShot)
         {
             GameObject projectile = Instantiate(minePrefab, transform.position, Quaternion.Euler(minePrefab.transform.position.x, minePrefab.transform.position.y + 1, minePrefab.transform.position.z));
             projectile.transform.position = new Vector3(projectile.transform.position.x, transform.position.y, projectile.transform.position.z);
