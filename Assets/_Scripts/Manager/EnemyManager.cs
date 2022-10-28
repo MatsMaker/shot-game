@@ -19,14 +19,14 @@ public class EnemyManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SpawnRandomAnimal();
+            SpawnRandomEnemy();
         }
     }
 
     public void startSpawn() {
-        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
+        InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
     }
-    void SpawnRandomAnimal()
+    void SpawnRandomEnemy()
     {
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnRangeZ);
         int animalIndex = Random.Range(0, enemyPrefabs.Length);

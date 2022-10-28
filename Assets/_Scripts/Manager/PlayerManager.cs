@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 
     public Text textElement;
     public Text textElement1;
-    public PlayerState state;
+    public SoldierState state;
     public BootsAmo bootsAmo;
     public GameObject bootsPrefab;
 

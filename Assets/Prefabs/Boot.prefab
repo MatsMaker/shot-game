@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 478404809837381433}
   - component: {fileID: -2964193799787960858}
   m_Layer: 0
-  m_Name: Army_boot 1
+  m_Name: Boot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
