@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
     public float playAreaXRange = 15;
 
     public PlayerManager player;
+    public CameraManager cameraManager;
     protected Joystick joystick;
     protected JoyButtonShot joyButtonShot;
     protected JoyButtonAmo joyButtonAmo;
-    protected Camera mMainCamera;
-    protected Vector3 diffPlayerCamera;
+    protected JoyButtonTurnCamera joyButtonTurnCamera;
     public EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
@@ -19,11 +19,10 @@ public class GameManager : MonoBehaviour
         joystick = FindObjectOfType<Joystick>();
         joyButtonShot = GameObject.Find("JoyButton1").GetComponent<JoyButtonShot>();
         joyButtonAmo = GameObject.Find("JoyButton2").GetComponent<JoyButtonAmo>();
+        joyButtonTurnCamera = GameObject.Find("JoyButton3").GetComponent<JoyButtonTurnCamera>();
 
-        mMainCamera = Camera.main;
-        Vector3 cameraPosition = Camera.main.transform.position;
-        diffPlayerCamera = new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z) - player.transform.position;
         enemyManager.startSpawn();
+        cameraManager.setAnchor(player.transform.position);
     }
 
     // Update is called once per frame
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
 
         player.transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * player.state.speed);
         player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.state.speed);
-        mMainCamera.transform.position = player.transform.position + diffPlayerCamera;
+        cameraManager.setTarget(player.transform.position);
 
         if (joyButtonAmo.Pressed)
         {
@@ -58,6 +57,13 @@ public class GameManager : MonoBehaviour
         if (joyButtonShot.Pressed)
         {
             player.bootsShot(Vector3.forward);
+        }
+
+        if (joyButtonTurnCamera.Pressed)
+        {
+            cameraManager.toSeeBack();
+        } else {
+            cameraManager.toSeeForward();
         }
     }
 }
