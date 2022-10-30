@@ -45,20 +45,22 @@ public class GameManager : MonoBehaviour
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, playAreaBack);
         }
 
-        player.transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * player.state.speed);
-        player.transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * player.state.speed);
-        cameraManager.setTarget(player.transform.position);
-
-        if (joyButtonAmo.Pressed)
-        {
-            player.mineShot();
+        if (joystick.Vertical != 0) {
+            player.Events.Invoke(PlayerEventType.Move, Vector3.forward * joystick.Vertical * Time.deltaTime * player.state.speed);
         }
-
+        if (joystick.Horizontal != 0) {
+            player.Events.Invoke(PlayerEventType.Move, Vector3.right * joystick.Horizontal * Time.deltaTime * player.state.speed);
+        }
         if (joyButtonShot.Pressed)
         {
-            player.bootsShot(Vector3.forward);
+            player.Events.Invoke(PlayerEventType.BootShot, Vector3.forward);
+        }
+        if (joyButtonAmo.Pressed)
+        {
+            player.Events.Invoke(PlayerEventType.MineShot, Vector3.forward);
         }
 
+        cameraManager.setTarget(player.transform.position);
         if (joyButtonTurnCamera.Pressed)
         {
             cameraManager.toSeeBack();

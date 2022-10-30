@@ -1,6 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+
+public enum PlayerEventType { Move, BootShot, MineShot };
+[System.Serializable]
+public class Events : UnityEvent<PlayerEventType, Vector3>
+{
+}
+
 public class PlayerManager : MonoBehaviour
 {
 
@@ -13,10 +22,13 @@ public class PlayerManager : MonoBehaviour
     public MineAmo minesAmo;
     public GameObject minePrefab;
 
+    public Events Events;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Events  = new Events();
+        Events.AddListener(EventListener);
     }
 
     // Update is called once per frame
@@ -24,6 +36,27 @@ public class PlayerManager : MonoBehaviour
     {
         textElement.text = "Boots: " + bootsAmo.countBoots;
         textElement1.text = "Mines: " + minesAmo.countMine;
+    }
+
+    private void EventListener(PlayerEventType eventType, Vector3 bias) {
+        switch (eventType)
+        {
+            case PlayerEventType.Move:
+                moveTo(bias);
+                break;
+            case PlayerEventType.BootShot:
+                bootsShot(bias);
+                break;
+            case PlayerEventType.MineShot:
+                mineShot();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void moveTo(Vector3 bias) {
+        transform.Translate(bias);
     }
 
     private IEnumerator updateBootsAmo()
@@ -44,7 +77,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void bootsShot(Vector3 angle)
+    void bootsShot(Vector3 angle)
     {
         if (bootsAmo.isReadyToBootsShot)
         {
@@ -73,7 +106,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void mineShot()
+    void mineShot()
     {
         if (minesAmo.isReadyToMineShot)
         {
@@ -82,4 +115,5 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(updateMineAmo());
         }
     }
+
 }

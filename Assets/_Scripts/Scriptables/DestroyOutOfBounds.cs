@@ -21,7 +21,7 @@ public class DestroyOutOfBounds : MonoBehaviour
         if (transform.position.z < GameManager.playAreaBack)
         {
             Destroy(gameObject);
-            Debug.Log("Game Over!");
+            Debug.Log("The enemy passed.\n Game Over!");
         }
     }
 }
