@@ -29,7 +29,7 @@ public class ClickAngle : MonoBehaviour
                 clickPosition.y = player.transform.position.y;
                 clickAngle = calculateDirectionAngle();
 
-                player.Events.Invoke(PlayerEventType.BootShot, new Vector3(0, clickAngle, 0));
+                player.events.Invoke(PlayerEventType.BootShot, new Vector3(0, clickAngle, 0));
             }
         }
     }

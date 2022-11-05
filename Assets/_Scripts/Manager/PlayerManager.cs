@@ -22,13 +22,13 @@ public class PlayerManager : MonoBehaviour
     public GameObject bootsPrefab;
     public MineAmo minesAmo;
     public GameObject minePrefab;
-    public Events Events;
+    public Events events;
 
     // Start is called before the first frame update
     void Start()
     {
-        Events  = new Events();
-        Events.AddListener(EventListener);
+        events  = new Events();
+        events.AddListener(EventListener);
         playerObj = Instantiate(_playerPrefab);
     }
 
@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         switch (eventType)
         {
             case PlayerEventType.Move:
-                moveTo(bias);
+                moveTo(bias * state.speed);
                 break;
             case PlayerEventType.BootShot:
                 bootsShot(bias);

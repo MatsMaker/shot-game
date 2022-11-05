@@ -1,25 +1,28 @@
 using UnityEngine;
 
+public enum GameState {
+    Play,
+    Stop,
+    GameOver,
+}
+
 public class GameManager : MonoBehaviour
 {
-    public int playAreaForward = 125;
-    public int playAreaBack = -25;
+    protected GameState state;
+    public float playAreaForward = 125;
+    public float playAreaBack = -25;
     public float playAreaXRange = 15;
 
     public PlayerManager playerMng;
+    public ControlManager controlMng;
     public CameraManager cameraManager;
-    protected Joystick joystick;
-    protected JoyButtonShot joyButtonShot;
-    protected JoyButtonAmo joyButtonAmo;
-    protected JoyButtonTurnCamera joyButtonTurnCamera;
     public EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
-        joystick = FindObjectOfType<Joystick>();
-        joyButtonShot = GameObject.Find("JoyButton1").GetComponent<JoyButtonShot>();
-        joyButtonAmo = GameObject.Find("JoyButton2").GetComponent<JoyButtonAmo>();
-        joyButtonTurnCamera = GameObject.Find("JoyButton3").GetComponent<JoyButtonTurnCamera>();
+        state = GameState.Play;
+        controlMng.playerEvents.AddListener(_playerControlListener);
+        controlMng.cameraEvents.AddListener(_cameraControlListener);
 
         enemyManager.startSpawn();
     }
@@ -27,39 +30,40 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // _limitsMovePlayer(); // TODO restore limits move player
-        _playerControl();
-        _updateCameraPosition();
-    }
-
-    protected void _playerControl() {
-        if (joystick.Vertical != 0) {
-            playerMng.Events.Invoke(PlayerEventType.Move, Vector3.forward * joystick.Vertical * Time.deltaTime * playerMng.state.speed);
-        }
-        if (joystick.Horizontal != 0) {
-            playerMng.Events.Invoke(PlayerEventType.Move, Vector3.right * joystick.Horizontal * Time.deltaTime * playerMng.state.speed);
-        }
-        if (joyButtonShot.Pressed)
+        switch (state)
         {
-            playerMng.Events.Invoke(PlayerEventType.BootShot, Vector3.forward);
-        }
-        if (joyButtonAmo.Pressed)
-        {
-            playerMng.Events.Invoke(PlayerEventType.MineShot, Vector3.forward);
+            case GameState.Play:
+                _playAreaLimits();
+                _updateCameraPosition();
+                break;
+            default:
+                break;
         }
     }
 
     protected void _updateCameraPosition() {
         cameraManager.setTarget(playerMng.transform.position);
-        if (joyButtonTurnCamera.Pressed)
+    }
+
+    protected void _playerControlListener(PlayerEventType type, Vector3 bias) {
+        playerMng.events.Invoke(type, bias);
+    }
+
+    protected void _cameraControlListener(CameraEventType type) {
+        switch (type)
         {
-            cameraManager.toSeeBack();
-        } else {
-            cameraManager.toSeeForward();
+            case CameraEventType.seeBackPressed:
+                cameraManager.toSeeBack();
+                break;
+            case CameraEventType.seeFrowardPressed:
+                cameraManager.toSeeForward();
+                break;
+            default:
+                break;
         }
     }
 
-    protected void _limitsMovePlayer() {
+    protected void _playAreaLimits() {
         if (playerMng.transform.position.x < -playAreaXRange)
         {
             playerMng.transform.position = new Vector3(-playAreaXRange, playerMng.transform.position.y, playerMng.transform.position.z);

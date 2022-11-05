@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum CameraEventType { seeFrowardPressed, seeBackPressed };
+
 public class CameraManager : MonoBehaviour
 {
     public Vector3 forwardRotation;
@@ -7,6 +9,7 @@ public class CameraManager : MonoBehaviour
     protected Camera mMainCamera;
     [SerializeField] protected Vector3 seeFrontAnchor;
     [SerializeField] protected Vector3 seeBackAnchor;
+    [SerializeField] protected Vector3 menuPosition;
     protected Vector3 target;
     void Start()
     {
