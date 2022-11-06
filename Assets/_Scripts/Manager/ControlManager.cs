@@ -14,6 +14,7 @@ public class ControlManager : MonoBehaviour
 {
     public PlayerControlEvents playerEvents;
     public CameraControlEvents cameraEvents;
+    public GameObject controlPanel;
     Joystick joystick;
     JoyButtonShot joyButtonShot;
     JoyButtonAmo joyButtonAmo;
@@ -66,5 +67,10 @@ public class ControlManager : MonoBehaviour
         {
             cameraEvents.Invoke(CameraEventType.seeFrowardPressed);
         }
+    }
+
+    public void ToggleControlPanel(bool isActive)
+    {
+        controlPanel.SetActive(isActive);
     }
 }

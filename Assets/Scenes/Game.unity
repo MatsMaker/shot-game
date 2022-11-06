@@ -1040,6 +1040,7 @@ MonoBehaviour:
   playerEvents:
     m_PersistentCalls:
       m_Calls: []
+  controlPanel: {fileID: 678491374}
 --- !u!4 &840100018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 16751862298628281, guid: 393958574fb68c41b8fe5ac441fe8cc8, type: 3}

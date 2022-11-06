@@ -21,11 +21,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        state = GameState.Play;
-        controlMng.playerEvents.AddListener(_PlayerControlListener);
-        controlMng.cameraEvents.AddListener(_CameraControlListener);
-        enemyMng.events.AddListener(_EnemyMngListener);
-        enemyMng.StartSpawn();
+        _StartGame();
     }
 
     void Update()
@@ -105,9 +101,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void _StartGame()
+    {
+        state = GameState.Play;
+        controlMng.ToggleControlPanel(true);
+        controlMng.playerEvents.AddListener(_PlayerControlListener);
+        controlMng.cameraEvents.AddListener(_CameraControlListener);
+        enemyMng.events.AddListener(_EnemyMngListener);
+        enemyMng.StartSpawn();
+    }
+
     void _GameOver()
     {
         state = GameState.Stop;
+        controlMng.ToggleControlPanel(false);
         Debug.Log("The enemy passed.\n Game Over!");
     }
 }
