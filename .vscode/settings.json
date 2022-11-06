@@ -55,5 +55,7 @@
     "cSpell.words": [
         "Behaviour",
         "Scriptable"
-    ]
+    ],
+    "editor.formatOnType": false,
+    "editor.formatOnSave": true
 }

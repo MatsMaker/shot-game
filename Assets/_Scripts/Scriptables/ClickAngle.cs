@@ -3,10 +3,10 @@ using UnityEngine;
 public class ClickAngle : MonoBehaviour
 {
     public PlayerManager player;
-    private Vector3 clickPosition;
-    private float clickAngle = 0;
+    Vector3 clickPosition;
+    float clickAngle = 0;
     public Plane plane = new Plane(Vector3.up, 0);
-    private float horizontalInput;
+    float horizontalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +27,14 @@ public class ClickAngle : MonoBehaviour
             {
                 clickPosition = ray.GetPoint(distance);
                 clickPosition.y = player.transform.position.y;
-                clickAngle = calculateDirectionAngle();
+                clickAngle = CalculateDirectionAngle();
 
                 player.events.Invoke(PlayerEventType.BootShot, new Vector3(0, clickAngle, 0));
             }
         }
     }
 
-    private float calculateDirectionAngle()
+    float CalculateDirectionAngle()
     {
         Vector3 direction = clickPosition - player.transform.position;
         int sign = direction.x >= 0 ? 1 : -1;

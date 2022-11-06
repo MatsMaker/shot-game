@@ -17,8 +17,8 @@ public class PlayerManager : MonoBehaviour
     public Text textElement1;
     public SoldierState state;
     public BootsAmo bootsAmo;
-    [SerializeField] private Player _playerPrefab;
-    private Player playerObj;
+    [SerializeField] Player _playerPrefab;
+    Player playerObj;
     public GameObject bootsPrefab;
     public MineAmo minesAmo;
     public GameObject minePrefab;
@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        events  = new Events();
+        events = new Events();
         events.AddListener(EventListener);
         playerObj = Instantiate(_playerPrefab);
     }
@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
         playerObj.transform.position = transform.position;
     }
 
-    private void EventListener(PlayerEventType eventType, Vector3 bias)
+    void EventListener(PlayerEventType eventType, Vector3 bias)
     {
         switch (eventType)
         {
@@ -58,11 +58,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void moveTo(Vector3 bias) {
+    void moveTo(Vector3 bias)
+    {
         transform.Translate(bias);
     }
 
-    private IEnumerator updateBootsAmo()
+    IEnumerator updateBootsAmo()
     {
         if (bootsAmo.countBoots > 0)
         {
@@ -91,7 +92,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private IEnumerator updateMineAmo()
+    IEnumerator updateMineAmo()
     {
         if (minesAmo.countMine > 0)
         {

@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public enum GameState {
+public enum GameState
+{
     Play,
     Stop,
     GameOver,
@@ -8,26 +9,25 @@ public enum GameState {
 
 public class GameManager : MonoBehaviour
 {
-    protected GameState state;
+    GameState state;
     public float playAreaForward = 125;
     public float playAreaBack = -25;
     public float playAreaXRange = 15;
 
     public PlayerManager playerMng;
     public ControlManager controlMng;
-    public CameraManager cameraManager;
-    public EnemyManager enemyManager;
-    // Start is called before the first frame update
+    public CameraManager cameraMng;
+    public EnemyManager enemyMng;
+
     void Start()
     {
         state = GameState.Play;
         controlMng.playerEvents.AddListener(_PlayerControlListener);
         controlMng.cameraEvents.AddListener(_CameraControlListener);
-        enemyManager.events.AddListener(_EnemyMngListener);
-        enemyManager.StartSpawn();
+        enemyMng.events.AddListener(_EnemyMngListener);
+        enemyMng.StartSpawn();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (state)
@@ -41,46 +41,52 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    protected void _UpdateCameraPosition() {
-        cameraManager.setTarget(playerMng.transform.position);
+    void _UpdateCameraPosition()
+    {
+        cameraMng.SetTarget(playerMng.transform.position);
     }
 
-    void _EnemyMngListener(EnemyEventTypes type, Enemy enemy) {
+    void _EnemyMngListener(EnemyEventTypes type, Enemy enemy)
+    {
         switch (type)
         {
             case EnemyEventTypes.OutArea:
+                enemyMng.DestroyEnemy(enemy);
                 _GameOver();
                 break;
             case EnemyEventTypes.Died:
-                enemyManager.DestroyEnemy(enemy);
+                enemyMng.DestroyEnemy(enemy);
                 break;
             default:
                 break;
         }
     }
 
-    protected void _PlayerControlListener(PlayerEventType type, Vector3 bias) {
+    void _PlayerControlListener(PlayerEventType type, Vector3 bias)
+    {
         if (state == GameState.Play)
         {
             playerMng.events.Invoke(type, bias);
         }
     }
 
-    protected void _CameraControlListener(CameraEventType type) {
+    void _CameraControlListener(CameraEventType type)
+    {
         switch (type)
         {
             case CameraEventType.seeBackPressed:
-                cameraManager.toSeeBack();
+                cameraMng.SeeBack();
                 break;
             case CameraEventType.seeFrowardPressed:
-                cameraManager.toSeeForward();
+                cameraMng.SeeForward();
                 break;
             default:
                 break;
         }
     }
 
-    protected void _PlayAreaLimits() {
+    void _PlayAreaLimits()
+    {
         if (playerMng.transform.position.x < -playAreaXRange)
         {
             playerMng.transform.position = new Vector3(-playAreaXRange, playerMng.transform.position.y, playerMng.transform.position.z);
@@ -99,7 +105,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void _GameOver() {
+    void _GameOver()
+    {
         state = GameState.Stop;
         Debug.Log("The enemy passed.\n Game Over!");
     }

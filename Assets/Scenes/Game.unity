@@ -1632,8 +1632,8 @@ MonoBehaviour:
   playAreaXRange: 15
   playerMng: {fileID: 997719410}
   controlMng: {fileID: 715883684}
-  cameraManager: {fileID: 241112772}
-  enemyManager: {fileID: 370922166}
+  cameraMng: {fileID: 241112772}
+  enemyMng: {fileID: 370922166}
 --- !u!1 &1647397534
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,25 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
 
-public enum EnemyEventTypes {
+public enum EnemyEventTypes
+{
     OutArea,
     Died
 }
 
-public class EnemyEvents: UnityEvent<EnemyEventTypes, Enemy> {};
+public class EnemyEvents : UnityEvent<EnemyEventTypes, Enemy> { };
 
 
 public class EnemyManager : MonoBehaviour
 {
     public float spawnPosY = 0;
-    private float spawnRangeX = 15;
-    private float spawnRangeZ = 120;
+    float spawnRangeX = 15;
+    float spawnRangeZ = 120;
 
-    private float startDelay = 2;
-    private float spawnInterval = 1.5f;
+    float startDelay = 2;
+    float spawnInterval = 1.5f;
     [SerializeField]
     public Enemy _enemyPrefab;
-    protected List<Enemy> enemyList;
+    List<Enemy> enemyList;
     public EnemyEvents events;
     // Start is called before the first frame update
     void Start()

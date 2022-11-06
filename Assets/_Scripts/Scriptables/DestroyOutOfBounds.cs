@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    private GameManager GameManager;
+    GameManager GameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -13,7 +13,8 @@ public class DestroyOutOfBounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z > GameManager.playAreaForward) {
+        if (transform.position.z > GameManager.playAreaForward)
+        {
             Destroy(gameObject);
         }
         if (transform.position.z < GameManager.playAreaBack)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private GameManager GameManager;
+    GameManager GameManager;
 
     public EnemyEvents enemyEventsRef;
     void Start()
@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour
 
     void _OutArea()
     {
-        if (transform.position.z > GameManager.playAreaForward) {
+        if (transform.position.z > GameManager.playAreaForward)
+        {
             enemyEventsRef.Invoke(EnemyEventTypes.OutArea, this);
         }
         if (transform.position.z < GameManager.playAreaBack)

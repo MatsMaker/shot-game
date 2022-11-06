@@ -14,10 +14,10 @@ public class ControlManager : MonoBehaviour
 {
     public PlayerControlEvents playerEvents;
     public CameraControlEvents cameraEvents;
-    protected Joystick joystick;
-    protected JoyButtonShot joyButtonShot;
-    protected JoyButtonAmo joyButtonAmo;
-    protected JoyButtonTurnCamera joyButtonTurnCamera;
+    Joystick joystick;
+    JoyButtonShot joyButtonShot;
+    JoyButtonAmo joyButtonAmo;
+    JoyButtonTurnCamera joyButtonTurnCamera;
     void Start()
     {
         playerEvents = new PlayerControlEvents();
@@ -32,16 +32,18 @@ public class ControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _playerControl();
-        _cameraControl();
+        _PlayerControl();
+        _CameraControl();
     }
 
-    protected void _playerControl()
+    void _PlayerControl()
     {
-        if (joystick.Vertical != 0) {
+        if (joystick.Vertical != 0)
+        {
             playerEvents.Invoke(PlayerEventType.Move, Vector3.forward * joystick.Vertical * Time.deltaTime);
         }
-        if (joystick.Horizontal != 0) {
+        if (joystick.Horizontal != 0)
+        {
             playerEvents.Invoke(PlayerEventType.Move, Vector3.right * joystick.Horizontal * Time.deltaTime);
         }
         if (joyButtonShot.Pressed)
@@ -54,12 +56,14 @@ public class ControlManager : MonoBehaviour
         }
     }
 
-    protected void _cameraControl()
+    void _CameraControl()
     {
         if (joyButtonTurnCamera.Pressed)
         {
             cameraEvents.Invoke(CameraEventType.seeBackPressed);
-        } else {
+        }
+        else
+        {
             cameraEvents.Invoke(CameraEventType.seeFrowardPressed);
         }
     }
