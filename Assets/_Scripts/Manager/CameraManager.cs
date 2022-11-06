@@ -18,16 +18,19 @@ public class CameraManager : MonoBehaviour
         mMainCamera = Camera.main;
     }
 
-    public void setTarget(Vector3 newTarget) {
+    public void setTarget(Vector3 newTarget)
+    {
         target = newTarget + seeFrontAnchor;
     }
 
-    public void toSeeForward() {
+    public void toSeeForward()
+    {
         mMainCamera.transform.rotation = Quaternion.Euler(forwardRotation);
         mMainCamera.transform.position = target + seeFrontAnchor;
     }
 
-    public void toSeeBack() {
+    public void toSeeBack()
+    {
         mMainCamera.transform.rotation = Quaternion.Euler(backRotation);
         mMainCamera.transform.position = target + seeBackAnchor;
     }

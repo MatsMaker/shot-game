@@ -36,7 +36,8 @@ public class ControlManager : MonoBehaviour
         _cameraControl();
     }
 
-    protected void _playerControl() {
+    protected void _playerControl()
+    {
         if (joystick.Vertical != 0) {
             playerEvents.Invoke(PlayerEventType.Move, Vector3.forward * joystick.Vertical * Time.deltaTime);
         }
@@ -53,7 +54,8 @@ public class ControlManager : MonoBehaviour
         }
     }
 
-    protected void _cameraControl() {
+    protected void _cameraControl()
+    {
         if (joyButtonTurnCamera.Pressed)
         {
             cameraEvents.Invoke(CameraEventType.seeBackPressed);

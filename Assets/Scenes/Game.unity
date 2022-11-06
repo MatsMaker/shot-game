@@ -723,8 +723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosY: 0
-  enemyPrefabs:
-  - {fileID: 2747516738350958782, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
+  _enemyPrefab: {fileID: -7636850038889278259, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
 --- !u!1 &475985833
 GameObject:
   m_ObjectHideFlags: 0

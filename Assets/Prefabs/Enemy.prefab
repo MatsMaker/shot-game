@@ -415,8 +415,9 @@ GameObject:
   - component: {fileID: 6286861752037980985}
   - component: {fileID: 1632680453370251677}
   - component: {fileID: 8832470334440718305}
+  - component: {fileID: -7636850038889278259}
   m_Layer: 0
-  m_Name: solder
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +460,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2747516738350958782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02a3c3f69b3826c9a9f1bd871ca3bea4, type: 3}
   m_Name: 
@@ -477,6 +478,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35612223, y: 0.8929146, z: 0.36806422}
   m_Center: {x: -0.005143631, y: 0.43280506, z: 0.018053865}
+--- !u!114 &-7636850038889278259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747516738350958782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37328cfe473e8324a8d5981fc3ba7d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2772330474049718025
 GameObject:
   m_ObjectHideFlags: 0

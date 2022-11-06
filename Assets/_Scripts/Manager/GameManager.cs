@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         state = GameState.Play;
-        controlMng.playerEvents.AddListener(_playerControlListener);
-        controlMng.cameraEvents.AddListener(_cameraControlListener);
-
-        enemyManager.startSpawn();
+        controlMng.playerEvents.AddListener(_PlayerControlListener);
+        controlMng.cameraEvents.AddListener(_CameraControlListener);
+        enemyManager.events.AddListener(_EnemyMngListener);
+        enemyManager.StartSpawn();
     }
 
     // Update is called once per frame
@@ -33,23 +33,40 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Play:
-                _playAreaLimits();
-                _updateCameraPosition();
+                _PlayAreaLimits();
+                _UpdateCameraPosition();
                 break;
             default:
                 break;
         }
     }
 
-    protected void _updateCameraPosition() {
+    protected void _UpdateCameraPosition() {
         cameraManager.setTarget(playerMng.transform.position);
     }
 
-    protected void _playerControlListener(PlayerEventType type, Vector3 bias) {
-        playerMng.events.Invoke(type, bias);
+    void _EnemyMngListener(EnemyEventTypes type, Enemy enemy) {
+        switch (type)
+        {
+            case EnemyEventTypes.OutArea:
+                _GameOver();
+                break;
+            case EnemyEventTypes.Died:
+                enemyManager.DestroyEnemy(enemy);
+                break;
+            default:
+                break;
+        }
     }
 
-    protected void _cameraControlListener(CameraEventType type) {
+    protected void _PlayerControlListener(PlayerEventType type, Vector3 bias) {
+        if (state == GameState.Play)
+        {
+            playerMng.events.Invoke(type, bias);
+        }
+    }
+
+    protected void _CameraControlListener(CameraEventType type) {
         switch (type)
         {
             case CameraEventType.seeBackPressed:
@@ -63,7 +80,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    protected void _playAreaLimits() {
+    protected void _PlayAreaLimits() {
         if (playerMng.transform.position.x < -playAreaXRange)
         {
             playerMng.transform.position = new Vector3(-playAreaXRange, playerMng.transform.position.y, playerMng.transform.position.z);
@@ -80,5 +97,10 @@ public class GameManager : MonoBehaviour
         {
             playerMng.transform.position = new Vector3(playerMng.transform.position.x, playerMng.transform.position.y, playAreaBack);
         }
+    }
+
+    void _GameOver() {
+        state = GameState.Stop;
+        Debug.Log("The enemy passed.\n Game Over!");
     }
 }
