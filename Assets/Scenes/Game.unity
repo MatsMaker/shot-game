@@ -672,7 +672,8 @@ MonoBehaviour:
   backRotation: {x: 42, y: 180, z: 0}
   seeFrontAnchor: {x: 0, y: 0, z: 0}
   seeBackAnchor: {x: 0, y: 0, z: 0}
-  menuPosition: {x: 0, y: 0, z: 0}
+  menuAnchor: {x: -0.6, y: 0, z: 0}
+  menuRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &334447220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 16751862298628281, guid: 393958574fb68c41b8fe5ac441fe8cc8, type: 3}

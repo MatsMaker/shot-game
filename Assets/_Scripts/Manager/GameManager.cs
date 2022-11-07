@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
                 _PlayAreaLimits();
                 _UpdateCameraPosition();
                 break;
+            case GameState.GameOver:
+                cameraMng.EndGameCamera();
+                break;
             default:
                 break;
         }
@@ -113,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     void _GameOver()
     {
-        state = GameState.Stop;
+        state = GameState.GameOver;
         controlMng.ToggleControlPanel(false);
         Debug.Log("The enemy passed.\n Game Over!");
     }
