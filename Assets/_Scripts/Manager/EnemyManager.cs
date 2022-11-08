@@ -16,7 +16,6 @@ public class EnemyManager : MonoBehaviour
     public float spawnPosY = 0;
     float spawnRangeX = 15;
     float spawnRangeZ = 120;
-
     float startDelay = 2;
     float spawnInterval = 1.5f;
     [SerializeField]
@@ -43,6 +42,10 @@ public class EnemyManager : MonoBehaviour
     {
         InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
     }
+    public void StopSpawn()
+    {
+        CancelInvoke("SpawnRandomEnemy");
+    }
     void SpawnRandomEnemy()
     {
         Vector3 spawnPos = new Vector3(
@@ -59,7 +62,6 @@ public class EnemyManager : MonoBehaviour
         // _enemyPrefab.transform.rotation
         AddEnemy(enemyObj);
     }
-
     public void AddEnemy(Enemy enemy)
     {
         enemy.enemyEventsRef = events;
@@ -67,7 +69,14 @@ public class EnemyManager : MonoBehaviour
             enemy
         );
     }
-
+    public void DestroyAllEnemy()//TODO fix remove all enemies
+    {
+        foreach (Enemy enemy in enemyList)
+        {
+            Destroy(enemy);
+        }
+        enemyList = new List<Enemy>();
+    }
     public void DestroyEnemy(Enemy enemy)
     {
         enemyList.Remove(enemy);

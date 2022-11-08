@@ -29,14 +29,12 @@ public class ControlManager : MonoBehaviour
         joyButtonAmo = GameObject.Find("JoyButton2").GetComponent<JoyButtonAmo>();
         joyButtonTurnCamera = GameObject.Find("JoyButton3").GetComponent<JoyButtonTurnCamera>();
     }
-
     // Update is called once per frame
     void Update()
     {
         _PlayerControl();
         _CameraControl();
     }
-
     void _PlayerControl()
     {
         if (joystick.Vertical != 0)
@@ -56,7 +54,6 @@ public class ControlManager : MonoBehaviour
             playerEvents.Invoke(PlayerEventType.MineShot, Vector3.forward);
         }
     }
-
     void _CameraControl()
     {
         if (joyButtonTurnCamera.Pressed)
@@ -68,7 +65,6 @@ public class ControlManager : MonoBehaviour
             cameraEvents.Invoke(CameraEventType.seeFrowardPressed);
         }
     }
-
     public void ToggleControlPanel(bool isActive)
     {
         controlPanel.SetActive(isActive);
