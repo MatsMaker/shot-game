@@ -16,13 +16,19 @@ public class PlayerManager : MonoBehaviour
     public Text textElement;
     public Text textElement1;
     public SoldierState state;
-    public BootsAmo bootsAmo;
+    BootsAmo bootsAmo;
     [SerializeField] Player _playerPrefab;
     Player playerObj;
     public GameObject bootsPrefab;
-    public MineAmo minesAmo;
+    MineAmo minesAmo;
     public GameObject minePrefab;
     public Events events;
+    void Awake()
+    {
+        state = ScriptableObject.CreateInstance<SoldierState>();
+        bootsAmo = ScriptableObject.CreateInstance<BootsAmo>();
+        minesAmo = ScriptableObject.CreateInstance<MineAmo>();
+    }
     void Start()
     {
         events = new Events();

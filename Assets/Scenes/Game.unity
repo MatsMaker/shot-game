@@ -495,7 +495,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 130125751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8103a26c0cb756929b5eca77ed4a78d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd92c790b2035b32a2607f1d11abff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Pressed: 0
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosY: 0
-  _enemyPrefab: {fileID: -7636850038889278259, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
+  _enemyPrefab: {fileID: 5088453700125074876, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
 --- !u!1 &475985833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 951196310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b88aa3ed2c964478ffccacd8ce0aa4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a3289c02ae48ace9a914e87a5057737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Pressed: 0
@@ -1223,10 +1223,8 @@ MonoBehaviour:
   textElement: {fileID: 26886244}
   textElement1: {fileID: 1683080106}
   state: {fileID: 11400000, guid: 3f66eb23f6131c1d5b0cb55b84737f2d, type: 2}
-  bootsAmo: {fileID: 11400000, guid: e3777c5eda8e70398bf69eab66360f65, type: 2}
-  _playerPrefab: {fileID: 5491098394468812302, guid: d91f219ee0fc3db9e906eb49e13fad25, type: 3}
+  _playerPrefab: {fileID: 6533579465592304399, guid: d91f219ee0fc3db9e906eb49e13fad25, type: 3}
   bootsPrefab: {fileID: 748384179304870170, guid: ecac5c11c9ad895669fd7c797ac38b46, type: 3}
-  minesAmo: {fileID: 11400000, guid: 2b6aeb791bf57c74190e550c5c3b603d, type: 2}
   minePrefab: {fileID: 3620024799244083179, guid: 6964c3029972f35d582b2956e8d58e5c, type: 3}
   events:
     m_PersistentCalls:
@@ -1384,7 +1382,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306262135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ccd16e894c0795a823be13d65ddb07, type: 3}
+  m_Script: {fileID: 11500000, guid: 291345cca2ce1bf6c82fc43f1b65d216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Pressed: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     GameManager GameManager;
-
     public EnemyEvents enemyEventsRef;
     void Start()
     {
@@ -15,11 +14,10 @@ public class Enemy : MonoBehaviour
     {
         _OutArea();
     }
-
-    public void DestroyObjectDelayed() {
+    public void DestroyObjectDelayed()
+    {
         Destroy(gameObject);
     }
-
     void _OutArea()
     {
         if (transform.position.z > GameManager.playAreaForward)
