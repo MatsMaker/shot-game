@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
         _OutArea();
     }
 
+    public void DestroyObjectDelayed() {
+        Destroy(gameObject);
+    }
+
     void _OutArea()
     {
         if (transform.position.z > GameManager.playAreaForward)

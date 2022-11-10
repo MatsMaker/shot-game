@@ -1,16 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
-
 public enum EnemyEventTypes
 {
     OutArea,
     Died
 }
-
 public class EnemyEvents : UnityEvent<EnemyEventTypes, Enemy> { };
-
-
 public class EnemyManager : MonoBehaviour
 {
     public float spawnPosY = 0;
@@ -28,8 +24,6 @@ public class EnemyManager : MonoBehaviour
         events = new EnemyEvents();
         enemyList = new List<Enemy>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         // if (Input.GetKeyDown(KeyCode.S))
@@ -37,7 +31,6 @@ public class EnemyManager : MonoBehaviour
         //     SpawnRandomEnemy();
         // }
     }
-
     public void StartSpawn()
     {
         InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
@@ -73,7 +66,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Enemy enemy in enemyList)
         {
-            Destroy(enemy);
+            enemy.DestroyObjectDelayed();
         }
         enemyList = new List<Enemy>();
     }

@@ -1,7 +1,9 @@
 using UnityEngine;
-
-public enum CameraEventType { seeFrowardPressed, seeBackPressed };
-
+public enum CameraEventType
+{
+    seeFrowardPressed,
+    seeBackPressed
+};
 public class CameraManager : MonoBehaviour
 {
     public Vector3 forwardRotation;

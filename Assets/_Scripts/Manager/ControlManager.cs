@@ -1,15 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
-
 [System.Serializable]
 public class PlayerControlEvents : UnityEvent<PlayerEventType, Vector3>
 {
 }
-
 public class CameraControlEvents : UnityEvent<CameraEventType>
 {
 }
-
 public class ControlManager : MonoBehaviour
 {
     public PlayerControlEvents playerEvents;

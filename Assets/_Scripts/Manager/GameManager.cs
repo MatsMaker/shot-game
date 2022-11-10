@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-
 public enum GameState
 {
     Start,
@@ -9,7 +8,6 @@ public enum GameState
     Reset,
     GameOver,
 }
-
 public class GameManager : MonoBehaviour
 {
     GameState state;
@@ -31,8 +29,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Play:
-                _PlayAreaLimits();
-                _UpdateCameraPosition();
+                _PlayGame();
                 break;
             case GameState.GameOver:
                 _GameOver();
@@ -43,9 +40,43 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Pause:
             default:
-                cameraMng.EndGameCamera();
+                _PauseGame();
                 break;
         }
+    }
+    void _StartGame()
+    {
+        controlMng.playerEvents.AddListener(_PlayerControlListener);
+        controlMng.cameraEvents.AddListener(_CameraControlListener);
+        enemyMng.events.AddListener(_EnemyMngListener);
+        enemyMng.StartSpawn();
+        controlMng.ToggleControlPanel(true);
+        cameraMng.SeeForward();
+        state = GameState.Play;
+    }
+    void _PlayGame()
+    {
+        _PlayAreaLimits();
+        _UpdateCameraPosition();
+    }
+    void _ResetGame()
+    {
+        enemyMng.DestroyAllEnemy();
+        enemyMng.StartSpawn();
+        controlMng.ToggleControlPanel(true);
+        cameraMng.SeeForward();
+        state = GameState.Play;
+    }
+    void _GameOver()
+    {
+        controlMng.ToggleControlPanel(false);
+        enemyMng.StopSpawn();
+        Debug.Log("The enemy passed.\n Game Over!");
+        state = GameState.Pause;
+    }
+    void _PauseGame()
+    {
+        cameraMng.EndGameCamera();
     }
     void _UpdateCameraPosition()
     {
@@ -107,32 +138,6 @@ public class GameManager : MonoBehaviour
         {
             playerMng.transform.position = new Vector3(playerMng.transform.position.x, playerMng.transform.position.y, playAreaBack);
         }
-    }
-    void _StartGame()
-    {
-        controlMng.ToggleControlPanel(true);
-        controlMng.playerEvents.AddListener(_PlayerControlListener);
-        controlMng.cameraEvents.AddListener(_CameraControlListener);
-        enemyMng.events.AddListener(_EnemyMngListener);
-        enemyMng.StartSpawn();
-        cameraMng.SeeForward();
-        state = GameState.Play;
-    }
-    void _ResetGame()
-    {
-        enemyMng.DestroyAllEnemy();
-        enemyMng.StartSpawn();
-        controlMng.ToggleControlPanel(true);
-        state = GameState.Play;
-    }
-    void _GameOver()
-    {
-        enemyMng.DestroyAllEnemy();
-
-        controlMng.ToggleControlPanel(false);
-        enemyMng.StopSpawn();
-        Debug.Log("The enemy passed.\n Game Over!");
-        state = GameState.Pause;
     }
     IEnumerator _AutoResetGame()
     {
