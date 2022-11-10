@@ -23,23 +23,18 @@ public class PlayerManager : MonoBehaviour
     public MineAmo minesAmo;
     public GameObject minePrefab;
     public Events events;
-
-    // Start is called before the first frame update
     void Start()
     {
         events = new Events();
         events.AddListener(EventListener);
         playerObj = Instantiate(_playerPrefab);
     }
-
-    // Update is called once per frame
     void Update()
     {
         textElement.text = "Boots: " + bootsAmo.countBoots;
         textElement1.text = "Mines: " + minesAmo.countMine;
         playerObj.transform.position = transform.position;
     }
-
     void EventListener(PlayerEventType eventType, Vector3 bias)
     {
         switch (eventType)
@@ -57,12 +52,10 @@ public class PlayerManager : MonoBehaviour
                 break;
         }
     }
-
     void moveTo(Vector3 bias)
     {
         transform.Translate(bias);
     }
-
     IEnumerator updateBootsAmo()
     {
         if (bootsAmo.countBoots > 0)
@@ -80,7 +73,6 @@ public class PlayerManager : MonoBehaviour
             bootsAmo.isReadyToBootsShot = bootsAmo.countBoots > 0;
         }
     }
-
     void bootsShot(Vector3 angle)
     {
         if (bootsAmo.isReadyToBootsShot)
@@ -91,7 +83,6 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(updateBootsAmo());
         }
     }
-
     IEnumerator updateMineAmo()
     {
         if (minesAmo.countMine > 0)
@@ -109,7 +100,6 @@ public class PlayerManager : MonoBehaviour
             minesAmo.isReadyToMineShot = minesAmo.countMine > 0;
         }
     }
-
     void mineShot()
     {
         if (minesAmo.isReadyToMineShot)
@@ -119,5 +109,4 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(updateMineAmo());
         }
     }
-
 }

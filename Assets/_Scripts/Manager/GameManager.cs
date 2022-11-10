@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public enum GameState
 {
     Start,
@@ -61,11 +62,7 @@ public class GameManager : MonoBehaviour
     }
     void _ResetGame()
     {
-        enemyMng.DestroyAllEnemy();
-        enemyMng.StartSpawn();
-        controlMng.ToggleControlPanel(true);
-        cameraMng.SeeForward();
-        state = GameState.Play;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void _GameOver()
     {
