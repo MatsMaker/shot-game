@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     public Text textElement;
     public Text textElement1;
-    public SoldierState state;
+    public PlayerProps props;
     BootsAmo bootsAmo;
     [SerializeField] Player _playerPrefab;
     Player playerObj;
@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     public Events events;
     void Awake()
     {
-        state = ScriptableObject.CreateInstance<SoldierState>();
+        props = ScriptableObject.CreateInstance<PlayerProps>();
         bootsAmo = ScriptableObject.CreateInstance<BootsAmo>();
         minesAmo = ScriptableObject.CreateInstance<MineAmo>();
     }
@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
         switch (eventType)
         {
             case PlayerEventType.Move:
-                moveTo(bias * state.speed);
+                moveTo(bias * props.speed);
                 break;
             case PlayerEventType.BootShot:
                 bootsShot(bias);
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         if (bootsAmo.isReadyToBootsShot)
         {
             GameObject projectile = Instantiate(bootsPrefab, transform.position, transform.rotation);
-            projectile.transform.position = new Vector3(projectile.transform.position.x, state.YProjectileShot, projectile.transform.position.z);
+            projectile.transform.position = new Vector3(projectile.transform.position.x, props.YProjectileShot, projectile.transform.position.z);
             projectile.transform.rotation = Quaternion.Euler(angle);
             StartCoroutine(updateBootsAmo());
         }

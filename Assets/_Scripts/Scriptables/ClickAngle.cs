@@ -18,7 +18,7 @@ public class ClickAngle : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        player.transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * player.state.speed);
+        player.transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * player.props.speed);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             float distance;

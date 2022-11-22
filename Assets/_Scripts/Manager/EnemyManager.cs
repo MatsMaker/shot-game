@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
     float startDelay = 2;
     float spawnInterval = 1.5f;
     [SerializeField]
-    public Enemy _enemyPrefab;
+    public Enemy _prefab;
     List<Enemy> enemyList;
     public EnemyEvents events;
     // Start is called before the first frame update
@@ -49,10 +49,9 @@ public class EnemyManager : MonoBehaviour
             0,
             spawnRangeZ
         );
-
-        Enemy enemyObj = Instantiate(_enemyPrefab);
+        Enemy enemyObj = Instantiate(_prefab);
         enemyObj.transform.position = spawnPos;
-        // _enemyPrefab.transform.rotation
+        // _prefab.transform.rotation
         AddEnemy(enemyObj);
     }
     public void AddEnemy(Enemy enemy)

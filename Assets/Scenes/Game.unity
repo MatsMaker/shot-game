@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosY: 0
-  _enemyPrefab: {fileID: 5088453700125074876, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
+  _prefab: {fileID: 5088453700125074876, guid: 99f22d7e8196933d9805d4d565030eb9, type: 3}
 --- !u!1 &475985833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textElement: {fileID: 26886244}
   textElement1: {fileID: 1683080106}
-  state: {fileID: 11400000, guid: 3f66eb23f6131c1d5b0cb55b84737f2d, type: 2}
+  props: {fileID: 0}
   _playerPrefab: {fileID: 6533579465592304399, guid: d91f219ee0fc3db9e906eb49e13fad25, type: 3}
   bootsPrefab: {fileID: 748384179304870170, guid: ecac5c11c9ad895669fd7c797ac38b46, type: 3}
   minePrefab: {fileID: 3620024799244083179, guid: 6964c3029972f35d582b2956e8d58e5c, type: 3}
