@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         controlMng.playerEvents.AddListener(_PlayerControlListener);
         controlMng.cameraEvents.AddListener(_CameraControlListener);
         enemyMng.events.AddListener(_EnemyMngListener);
-        enemyMng.StartSpawn();
+        enemyMng.StartAutoSpawn();
         controlMng.ToggleControlPanel(true);
         cameraMng.SeeForward();
         state = GameState.Play;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     void _GameOver()
     {
         controlMng.ToggleControlPanel(false);
-        enemyMng.StopSpawn();
+        enemyMng.StopAutoSpawn();
         Debug.Log("The enemy passed.\n Game Over!");
         state = GameState.Pause;
     }

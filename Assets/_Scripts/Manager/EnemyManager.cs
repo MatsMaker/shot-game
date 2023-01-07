@@ -9,49 +9,109 @@ public enum EnemyEventTypes
 public class EnemyEvents : UnityEvent<EnemyEventTypes, Enemy> { };
 public class EnemyManager : MonoBehaviour
 {
-    public float spawnPosY = 0;
+    bool autoSpawnIsActive = false;
+
+    float delayWave = 0f;
+    float spawnInterval = 0f;
+    float waveTime = 0f;
+    float spawnXSpread = 0f;
+    float spawnXWave = 0;
+    float nextSpawnTime = 0f;
+    float endWaveTime = 0f;
+
     float spawnRangeX = 15;
+    public float spawnPosY = 0;
     float spawnRangeZ = 120;
-    float startDelay = 2;
-    float spawnInterval = 1.5f;
+    float minSpawnInterval = 0.2f;
+
     [SerializeField]
     public Enemy _prefab;
     List<Enemy> enemyList;
     public EnemyEvents events;
+
+    public void ResetSpawn()
+    {
+        delayWave = 15f;
+        spawnInterval = 2f;
+        waveTime = 3f;
+        spawnXSpread = 0.5f;
+        spawnXWave = 0;
+        nextSpawnTime = 0f;
+        endWaveTime = 0f;
+    }
     // Start is called before the first frame update
     void Start()
     {
         events = new EnemyEvents();
         enemyList = new List<Enemy>();
+        ResetSpawn();
     }
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.S))
-        // {
-        //     SpawnRandomEnemy();
-        // }
+        if (autoSpawnIsActive)
+        {
+            if (Time.fixedTime >= endWaveTime) // next wave spawn
+            {
+                NextSpawnWave();
+            }
+            else if (Time.fixedTime >= nextSpawnTime) // next spawn
+            {
+                SpawnRandomEnemy();
+                NextSpawnSpawn();
+            }
+        }
     }
-    public void StartSpawn()
+    public void StartAutoSpawn()
     {
-        InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
+        autoSpawnIsActive = true;
+        NextSpawnWave();
     }
-    public void StopSpawn()
+    public void StopAutoSpawn()
     {
-        CancelInvoke("SpawnRandomEnemy");
+        autoSpawnIsActive = false;
+    }
+    void NextSpawnSpawn()
+    {
+        nextSpawnTime = Time.fixedTime + spawnInterval;
+    }
+    void NextSpawnWave()
+    {
+        delayWave -= 0.5f;
+        spawnInterval -= 0.3f;
+        if (spawnInterval < minSpawnInterval)
+        {
+            spawnInterval = minSpawnInterval;
+        }
+        waveTime += 1f;
+        spawnXSpread += 0.5f;
+        spawnXWave = Random.Range(
+                -spawnRangeX + spawnXSpread,
+                spawnRangeX - spawnXSpread
+        );
+        nextSpawnTime = Time.fixedTime + delayWave + spawnInterval;
+        endWaveTime = nextSpawnTime + waveTime;
     }
     void SpawnRandomEnemy()
     {
+        float randomX = Random.Range(
+                -(spawnXWave + spawnXSpread),
+                spawnXWave + spawnXSpread
+            );
+        if (randomX < -spawnRangeX)
+        {
+            randomX = -spawnRangeX;
+        }
+        if (randomX > spawnRangeX)
+        {
+            randomX = spawnRangeX;
+        }
         Vector3 spawnPos = new Vector3(
-            Random.Range(
-                -spawnRangeX,
-                spawnRangeX
-            ),
+            randomX,
             0,
             spawnRangeZ
         );
         Enemy enemyObj = Instantiate(_prefab);
         enemyObj.transform.position = spawnPos;
-        // _prefab.transform.rotation
         AddEnemy(enemyObj);
     }
     public void AddEnemy(Enemy enemy)
